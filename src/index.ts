@@ -6,14 +6,29 @@ import dotenv from "dotenv";
 // main route
 import mainRouter from "./api/v1/index";
 
+// database pool
+import pool from "./db/dbConnection";
+
 // middlewares
 import appMiddleware from "./middlewares/appMiddleware";
+import logger from "./middlewares/systemLogger";
 
 // instantiate app
 dotenv.config();
 const app = express();
 appMiddleware(app);
 const PORT = process.env.PORT;
+
+// database connection
+(async () => {
+  const client = await pool.connect();
+  try {
+    const response = await client.query('select now() as "Current_Time"');
+    logger.info(`"Connected to database at: ${response.rows[0].Current_Time}`);
+  } finally {
+    client.release();
+  }
+})().catch((err) => logger.error(err.stack));
 
 // default routes
 app.use("/api/v1", mainRouter);
@@ -27,9 +42,9 @@ app.get("*", (req, res) => {
 if (!module.parent) {
   try {
     app.listen(PORT, () => {
-      console.log(`App started. Listening on port ${PORT}...`);
+      logger.info(`App started. Listening on port ${PORT}...`);
     });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
   }
 }

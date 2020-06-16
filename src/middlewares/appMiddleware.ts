@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 // dependencies
-import logger from "morgan";
+import morgan from "morgan";
 import express from "express";
 
 // middlewares
@@ -24,7 +24,7 @@ export default (app: {
   }) => void;
   disable: (arg0: string) => void;
 }) => {
-  app.use(logger("dev"));
+  app.use(morgan("dev"));
   app.use((req: any, res: any, next: () => void) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
