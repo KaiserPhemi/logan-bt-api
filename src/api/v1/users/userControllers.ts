@@ -1,3 +1,9 @@
+// database connection
+import pool from "../../../db/dbConnection";
+import { selectAll } from "../../../db/query";
+
+// middleware
+
 /**
  * @desc User controllers
  */
@@ -7,8 +13,20 @@ const userController = {
    * @param req
    * @param res
    */
-  async getAllUsers(req, res) {
-    return res.body;
+  async getAllUsers(req: unknown, res: any): Promise<unknown> {
+    let allUsers;
+    try {
+      allUsers = await pool.query(selectAll(`user_account`));
+      return res.status(200).json({
+        message: "All users retrieved."
+        // allUsers
+      });
+    } catch (error) {
+      return res.status(404).json({
+        message: "Internal error",
+        error
+      });
+    }
   },
 
   /**
@@ -24,3 +42,5 @@ const userController = {
     });
   }
 };
+
+export default userController;
