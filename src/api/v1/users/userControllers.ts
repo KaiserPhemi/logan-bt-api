@@ -1,6 +1,6 @@
 // database connection
 import pool from "../../../db/dbConnection";
-import { selectAll } from "../../../db/query";
+import { selectAll, create } from "../../../db/query";
 
 // middleware
 
@@ -36,10 +36,18 @@ const userController = {
    */
   async createUser(req: { body: any }, res: any) {
     const { body } = req;
-    return res.status(200).json({
-      message: "User created successfully.",
-      body
-    });
+    let createdUser;
+    try {
+      createdUser = await pool.query(create("user_account", body));
+      return res.status(200).json({
+        message: "User created successfully.",
+        createdUser
+      });
+    } catch (error) {
+      return res.status(403).json({
+        message: "An internal error"
+      });
+    }
   }
 };
 

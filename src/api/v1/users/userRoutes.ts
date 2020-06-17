@@ -8,6 +8,9 @@ import userController from "./userControllers";
 const userRoutes = express.Router();
 
 // routes
-userRoutes.route("/").get(userController.getAllUsers);
+userRoutes
+  .route("/")
+  .get(userController.getAllUsers)
+  .post(userController.createUser);
 
 export default userRoutes;
