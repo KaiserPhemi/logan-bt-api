@@ -34,7 +34,7 @@ const userController = {
    * @param req
    * @param res
    */
-  async createUser(req: { body: any }, res: any) {
+  async createUser(req: { body: any }, res: any): Promise<unknown> {
     const { body } = req;
     let createdUser;
     try {
@@ -45,7 +45,8 @@ const userController = {
       });
     } catch (error) {
       return res.status(403).json({
-        message: "An internal error"
+        message: "An internal error",
+        error
       });
     }
   }

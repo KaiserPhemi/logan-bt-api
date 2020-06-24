@@ -2,8 +2,9 @@
  * @desc
  * @param dbTable string
  */
-export const selectAll = (dbTable: string): string => {
-  return `select * from ${dbTable};`;
+export const selectAll = (tableName: string): string => {
+  // return `select * from ${tableName};`;
+  return `select * from user_account;`;
 };
 
 /**
@@ -23,7 +24,6 @@ export interface IBody {
  */
 export const create = (tableName: string, body: IBody): string => {
   const { firstName, lastName, email, password } = body;
-  console.log("got here", body);
-  return `insert into user_role (first_name, last_name, email, user_password) values ('${firstName}', '${lastName}', '${email}', '${password}')
+  return `insert into "user_account" (first_name, last_name, email, user_password) values ('${firstName}', '${lastName}', '${email}', '${password}')
   returning public_id, email, user_name;`;
 };
