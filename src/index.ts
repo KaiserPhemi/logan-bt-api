@@ -4,7 +4,7 @@ import express from "express";
 import dotenv from "dotenv";
 
 // main route
-import mainRouter from "./api/v1/index";
+import mainRouter from "./api/index";
 
 // database pool
 import pool from "./db/dbConnection";

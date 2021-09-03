@@ -1,6 +1,6 @@
 // database connection
-import pool from "../../../db/dbConnection";
-import { selectAll, create } from "../../../db/query";
+import pool from "../../db/dbConnection";
+import { selectAll, create } from "../../db/query";
 
 // middleware
 
