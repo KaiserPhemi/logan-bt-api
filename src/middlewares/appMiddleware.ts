@@ -1,21 +1,17 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 // dependencies
 import morgan from "morgan";
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 
 // middlewares
 export default (app: {
   use: (arg0: {
     (
-      req: import("http").IncomingMessage,
-      res: import("http").ServerResponse,
+      req: Request,
+      res: Response,
       callback: (err?: Error | undefined) => void
     ): void;
-    (
-      req: import("connect").IncomingMessage,
-      res: import("http").ServerResponse,
-      next: import("connect").NextFunction
-    ): void;
+    (req: Request, res: Response, next: NextFunction): void;
     (
       req: import("connect").IncomingMessage,
       res: import("http").ServerResponse,
@@ -25,14 +21,16 @@ export default (app: {
   disable: (arg0: string) => void;
 }) => {
   app.use(morgan("dev"));
-  app.use((req: any, res: any, next: () => void) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
+  app.use(
+    (req: any, res: any, next: any) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+      );
+      next();
+    }
+  );
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.disable("x-powered-by");
