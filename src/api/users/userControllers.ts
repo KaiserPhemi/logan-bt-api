@@ -1,28 +1,30 @@
+// third-party libraries
+import { Request, Response } from "express";
+
 // database connection
 import pool from "../../db/dbConnection";
 import { selectAll, create } from "../../db/query";
 
-// middleware
+// services
+import userService from "../../services/userService";
 
-/**
- * @desc User controllers
- */
+// User controller
 const userController = {
   /**
    * @desc Returns all users in the database
    * @param req
    * @param res
    */
-  async getAllUsers(req: unknown, res: any): Promise<unknown> {
-    let allUsers;
+  async getAllUsers(req: Request, res: Response): Promise<unknown> {
     try {
-      allUsers = await pool.query(selectAll(`user_account`));
+      // fetch all users
+      const users = await userService.fetchAllUsers();
       return res.status(200).json({
-        message: "All users retrieved."
-        // allUsers
+        message: "All users fetched successfully.",
+        users
       });
     } catch (error) {
-      return res.status(404).json({
+      return res.status(500).json({
         message: "Internal error",
         error
       });
@@ -30,22 +32,17 @@ const userController = {
   },
 
   /**
-   * @desc creates a user
+   * Adds a new user
    * @param req
    * @param res
+   * @returns
    */
-  async createUser(req: { body: any }, res: any): Promise<unknown> {
-    const { body } = req;
-    let createdUser;
+  async addUser(req: Request, res: Response): Promise<unknown> {
     try {
-      createdUser = await pool.query(create("user_account", body));
-      return res.status(200).json({
-        message: "User created successfully.",
-        createdUser
-      });
+      return;
     } catch (error) {
-      return res.status(403).json({
-        message: "An internal error",
+      return res.status(500).json({
+        message: "Internal error",
         error
       });
     }
