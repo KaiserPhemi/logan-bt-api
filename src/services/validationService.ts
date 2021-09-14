@@ -8,6 +8,6 @@ const validationService = {
     email: Joi.string().email({ minDomainSegments: 2 }),
     password: Joi.string().min(8).required()
   })
-}
+};
 
 export default validationService;

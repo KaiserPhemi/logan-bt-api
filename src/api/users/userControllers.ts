@@ -1,12 +1,11 @@
 // third-party libraries
 import { Request, Response } from "express";
 
-// database connection
-import pool from "../../db/dbConnection";
-import { selectAll, create } from "../../db/query";
-
 // services
 import userService from "../../services/userService";
+
+// helper
+import errorReponse from "../../helpers/errorResponse";
 
 // User controller
 const userController = {
@@ -24,10 +23,7 @@ const userController = {
         users
       });
     } catch (error) {
-      return res.status(500).json({
-        message: "Internal error",
-        error
-      });
+      return errorReponse(error, res);
     }
   },
 
@@ -41,10 +37,7 @@ const userController = {
     try {
       return;
     } catch (error) {
-      return res.status(500).json({
-        message: "Internal error",
-        error
-      });
+      return errorReponse(error, res);
     }
   }
 };

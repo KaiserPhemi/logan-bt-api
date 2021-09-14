@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 // dependencies
 import morgan from "morgan";
@@ -21,16 +22,14 @@ export default (app: {
   disable: (arg0: string) => void;
 }) => {
   app.use(morgan("dev"));
-  app.use(
-    (req: any, res: any, next: any) => {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-      );
-      next();
-    }
-  );
+  app.use((req: any, res: any, next: any) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.disable("x-powered-by");

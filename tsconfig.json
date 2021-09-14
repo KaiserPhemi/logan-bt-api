@@ -1,14 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "allowJs": true,
+    "target": "esnext",
     "module": "commonjs",
-    "rootDir": "src",
     "outDir": "build",
-    "strict": true /* Enable all strict type-checking options. */,
-    "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
-    "sourceMap": true /* Emit a single file with source maps instead of having a separate file. */,
-    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+    "strict": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "index.ts",
+    "knexfile.js"
+  ],
   "exclude": ["node_modules"]
 }

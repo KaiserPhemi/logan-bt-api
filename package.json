@@ -1,7 +1,6 @@
 {
   "name": "node-ts-template",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "git@github.com:KaiserPhemi/node-ts-template.git",
   "author": "KaiserPhemi <kaiser.phemi@protonmail.ch>",
   "license": "MIT",

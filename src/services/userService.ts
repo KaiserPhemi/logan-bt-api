@@ -35,11 +35,7 @@ const userService = {
    * @param password
    * @returns
    */
-  async addUser(
-    name: string,
-    email: string,
-    password: string
-  ): Promise<any> {
+  async addUser(name: string, email: string, password: string): Promise<any> {
     try {
       // TO-DO Add a new user to the table
       return;
