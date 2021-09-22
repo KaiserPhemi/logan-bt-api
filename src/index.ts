@@ -34,3 +34,5 @@ process.on("SIGINT", () => {
   logger.info("Server shut down success");
   process.exit(0);
 });
+
+export default app;

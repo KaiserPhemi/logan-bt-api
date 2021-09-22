@@ -1,5 +1,5 @@
 // TODO Import modules
-// Service for the "users"" table
+// Service for the "users" table
 const userService = {
   /**
    * Fetches all users in the system

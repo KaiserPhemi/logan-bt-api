@@ -34,6 +34,7 @@ const userController = {
    * @returns
    */
   async addUser(req: Request, res: Response): Promise<unknown> {
+    const { name, email, password } = req.body;
     try {
       return;
     } catch (error) {
