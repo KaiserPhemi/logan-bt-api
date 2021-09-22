@@ -7,6 +7,6 @@ import app from "./index";
 // test suite
 describe("App", () => {
   it("Should run", async () => {
-    //
+    request(app).get();
   });
 });

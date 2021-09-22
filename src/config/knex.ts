@@ -1,5 +1,11 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import config from "../../knexfile";
-const environment: string = process.env.NODE_ENV || "development";
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+// third-party modules
+import knex from "knex";
 
-module.exports = require("knex")(config[environment]);
+// database config
+import config from "../../knexfile";
+
+const environment = process.env.NODE_ENV || "development";
+const db = knex(config[environment]);
+
+export default db;

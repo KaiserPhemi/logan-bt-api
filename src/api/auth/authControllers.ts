@@ -11,7 +11,7 @@ const authController = {
    * @param req
    * @param res
    */
-  async loginUser(req: Request, res: Response): Promise<any> {
+  async loginUser(req: Request, res: Response): Promise<unknown> {
     try {
       return res.status(200).json({
         message: "User logged in successfully."

@@ -16,7 +16,6 @@ const userController = {
    */
   async getAllUsers(req: Request, res: Response): Promise<unknown> {
     try {
-      // fetch all users
       const users = await userService.fetchAllUsers();
       return res.status(200).json({
         message: "All users fetched successfully.",
@@ -36,6 +35,10 @@ const userController = {
   async addUser(req: Request, res: Response): Promise<unknown> {
     const { name, email, password } = req.body;
     try {
+      // check if user already exist using email
+      // return error if true else proceed
+      const newUser = await userService.addUser(name, email, password);
+
       return;
     } catch (error) {
       return errorReponse(error, res);

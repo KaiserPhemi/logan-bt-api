@@ -17,7 +17,7 @@
   "include": [
     "src/**/*.ts",
     "index.ts",
-    "knexfile.js"
+    "knexfile.ts"
   ],
   "exclude": ["node_modules"]
 }

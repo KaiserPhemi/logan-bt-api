@@ -1,6 +1,6 @@
-/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Update with your config settings.
-module.exports = {
+const dbConfig: { [key: string]: any } = {
   development: {
     client: "pg",
     connection: {
@@ -18,3 +18,5 @@ module.exports = {
     }
   }
 };
+
+export default dbConfig;

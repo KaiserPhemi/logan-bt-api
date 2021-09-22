@@ -1,14 +1,16 @@
-// TODO Import modules
+// db config
+import db from "../config/knex";
+
 // Service for the "users" table
 const userService = {
   /**
    * Fetches all users in the system
    * @returns
    */
-  async fetchAllUsers(): Promise<any> {
+  async fetchAllUsers(): Promise<unknown> {
     try {
-      // TO_DO connect db and fetch all users
-      return;
+      const allUsers = await db("users_table").select("*");
+      return allUsers;
     } catch (error) {
       return error;
     }
@@ -19,10 +21,19 @@ const userService = {
    * @param id
    * @returns
    */
-  async fetchUser(id: number): Promise<any> {
+  async fetchUser(id: number): Promise<unknown> {
     try {
-      // TO_DO fetch user by id
-      return;
+      const fetchedUser = await db("users_table").select("*").where({ id });
+      return fetchedUser;
+    } catch (error) {
+      return error;
+    }
+  },
+
+  async fetchUserByEmail(email: string): Promise<unknown> {
+    try {
+      const savedUser = await db("users_table").select("*").where({ email });
+      return savedUser;
     } catch (error) {
       return error;
     }
@@ -35,10 +46,36 @@ const userService = {
    * @param password
    * @returns
    */
-  async addUser(name: string, email: string, password: string): Promise<any> {
+  async addUser(
+    name: string,
+    email: string,
+    password: string
+  ): Promise<unknown> {
     try {
-      // TO-DO Add a new user to the table
-      return;
+      const newUser = await db("users_table")
+        .insert({
+          name,
+          email,
+          password
+        })
+        .returning("*");
+      return newUser;
+    } catch (error) {
+      return error;
+    }
+  },
+
+  /**
+   * Delete a user
+   * @param id
+   * @returns
+   */
+  async deleteUser(id: number): Promise<unknown> {
+    try {
+      const deletedUser = await db("users_table")
+        .where({ id })
+        .update({ is_deleted: false });
+      return deletedUser;
     } catch (error) {
       return error;
     }

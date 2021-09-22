@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // third-party libraries
 import { Knex } from "knex";
 
@@ -7,7 +8,7 @@ import { Knex } from "knex";
  * @returns
  */
 export async function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable("users_table", (table) => {
+  return knex.schema.createTable("users_table", (table: any) => {
     table.increments("id").primary();
     table.uuid("public_id").defaultTo(knex.raw("uuid_generate_v4()"));
     table.string("name").notNullable().unique();

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 // third-party libraries
 import { Request, Response, NextFunction } from "express";
 
@@ -11,7 +13,7 @@ const validateInput = (validation: any) => {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<any> => {
+  ): Promise<unknown> => {
     const checkInput = await validation.validate({ ...req.body });
     if (!checkInput.error) {
       next();
