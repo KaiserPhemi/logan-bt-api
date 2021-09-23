@@ -1,6 +1,12 @@
 // third-party libraries
 import express from "express";
 
+// middlewares
+import validateInput from "../../middlewares/validateInput";
+
+// services
+import validationService from "../../services/validationService";
+
 // controllers
 import userController from "./userControllers";
 
@@ -11,6 +17,6 @@ const userRoutes = express.Router();
 userRoutes
   .route("/")
   .get(userController.getAllUsers)
-  .post(userController.createUser);
+  .post(validateInput(validationService.addUser), userController.addUser);
 
 export default userRoutes;
