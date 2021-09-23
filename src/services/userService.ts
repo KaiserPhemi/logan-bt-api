@@ -30,7 +30,7 @@ const userService = {
     }
   },
 
-  async fetchUserByEmail(email: string): Promise<unknown> {
+  async fetchUserByEmail(email: string): Promise<any> {
     try {
       const savedUser = await db("users_table").select("*").where({ email });
       return savedUser;

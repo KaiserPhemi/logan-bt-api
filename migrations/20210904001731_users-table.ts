@@ -10,7 +10,7 @@ import { Knex } from "knex";
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable("users_table", (table: any) => {
     table.increments("id").primary();
-    table.string("name").notNullable().unique();
+    table.string("name").notNullable();
     table.string("email").notNullable().unique();
     table.string("password").notNullable().unique();
     table.boolean("is_email_verified").defaultTo(false);
