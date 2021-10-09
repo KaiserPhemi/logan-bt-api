@@ -19,4 +19,6 @@ userRoutes
   .get(userController.getAllUsers)
   .post(validateInput(validationService.addUser), userController.addUser);
 
+userRoutes.route("/verify").put(userController.verifyUser);
+
 export default userRoutes;

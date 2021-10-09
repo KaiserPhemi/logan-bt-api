@@ -8,6 +8,7 @@ import userService from "../../services/userService";
 // helper
 import errorReponse from "../../helpers/errorResponse";
 
+// constant
 const SALT_ROUNDS = 10;
 
 // User controller
@@ -54,6 +55,24 @@ const userController = {
         message: "User added successfully.",
         user: newUser
       });
+    } catch (error) {
+      return errorReponse(error, res);
+    }
+  },
+
+  /**
+   * Verify users' email/registration
+   * @param req
+   * @param res
+   * @returns
+   */
+  async verifyUser(req: Request, res: Response): Promise<unknown> {
+    try {
+      // TODO get token
+      // TODO verify token
+      // TODO verify email
+      // TODO delete token
+      // TODO send response
     } catch (error) {
       return errorReponse(error, res);
     }
