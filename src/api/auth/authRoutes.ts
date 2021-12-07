@@ -11,14 +11,14 @@ import validateInput from "../../middlewares/validateInput";
 import validationService from "../../services/validationService";
 
 // router
-const authRoute = express.Router();
+const authRouter = express.Router();
 
 // routes
-authRoute
+authRouter
   .route("/login")
   .post(validateInput(validationService.login), authController.loginUser);
-authRoute
+authRouter
   .route("/logout")
   .delete(validateInput(validationService.login), authController.logout);
 
-export default authRoute;
+export default authRouter;

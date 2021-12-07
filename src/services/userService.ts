@@ -30,10 +30,15 @@ const userService = {
     }
   },
 
+  /**
+   * Fetch user by email
+   * @param email
+   * @returns
+   */
   async fetchUserByEmail(email: string): Promise<any> {
     try {
       const savedUser = await db("users_table").select("*").where({ email });
-      return savedUser;
+      return savedUser[0];
     } catch (error) {
       return error;
     }
