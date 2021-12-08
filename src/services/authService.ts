@@ -1,6 +1,3 @@
-const authService = {
-
-
-}
+const authService = {};
 
 export default authService;

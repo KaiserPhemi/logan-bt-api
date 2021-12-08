@@ -1,6 +1,8 @@
 // third-party libraries
 import jwt from "jsonwebtoken";
 
+const secretKey = process.env.SECRET_KEY;
+
 // token helper
 const authToken = {
   /**
@@ -10,7 +12,7 @@ const authToken = {
    * @returns
    */
   async createAccessToken(email: string, userId: string): Promise<string> {
-    return jwt.sign({ email, userId }, process.env.SECRET_KEY, {
+    return jwt.sign({ email, userId }, secretKey, {
       expiresIn: "1h"
     });
   }
