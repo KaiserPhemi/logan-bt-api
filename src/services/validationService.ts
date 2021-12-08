@@ -7,6 +7,12 @@ const validationService = {
     name: Joi.string().max(100).required(),
     email: Joi.string().email({ minDomainSegments: 2 }),
     password: Joi.string().min(8).required()
+  }),
+
+  // validates user login details
+  login: Joi.object({
+    email: Joi.string().email({ minDomainSegments: 2 }),
+    password: Joi.string().min(8).required()
   })
 };
 

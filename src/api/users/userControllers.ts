@@ -8,6 +8,7 @@ import userService from "../../services/userService";
 // helper
 import errorReponse from "../../helpers/errorResponse";
 
+// constant
 const SALT_ROUNDS = 10;
 
 // User controller
@@ -17,7 +18,7 @@ const userController = {
    * @param req
    * @param res
    */
-  async getAllUsers(req: Request, res: Response): Promise<unknown> {
+  async getAllUsers(req: Request, res: Response): Promise<Response> {
     try {
       const users = await userService.fetchAllUsers();
       return res.status(200).json({
@@ -35,7 +36,7 @@ const userController = {
    * @param res
    * @returns
    */
-  async addUser(req: Request, res: Response): Promise<unknown> {
+  async addUser(req: Request, res: Response): Promise<Response> {
     const { name, email } = req.body;
     let { password } = req.body;
     try {
@@ -54,6 +55,25 @@ const userController = {
         message: "User added successfully.",
         user: newUser
       });
+    } catch (error) {
+      return errorReponse(error, res);
+    }
+  },
+
+  /**
+   * Verify users' email/registration
+   * @param req
+   * @param res
+   * @returns
+   */
+  async verifyUser(req: Request, res: Response): Promise<Response> {
+    try {
+      // TODO get token
+      // TODO verify token
+      // TODO verify email
+      // TODO delete token
+      // TODO send response
+      return res.status(200).json({ message: "User verified" });
     } catch (error) {
       return errorReponse(error, res);
     }
