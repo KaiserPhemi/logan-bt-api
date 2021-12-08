@@ -10,7 +10,7 @@ const authToken = {
    * @returns
    */
   async createAccessToken(email: string, userId: string): Promise<string> {
-    return jwt.sign({ email, userId }, process.env.JWT_SECRET, {
+    return jwt.sign({ email, userId }, process.env.SECRET_KEY, {
       expiresIn: "1h"
     });
   }
