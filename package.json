@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node build/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only index.ts",
     "build": "rm -rf build && tsc",
     "lint": "eslint . --ext .ts --fix",
     "test": "jest --watchAll",
