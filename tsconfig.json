@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "target": "esnext",
+    "target": "es2019",
+    "lib": [
+      "es2019"
+    ],
     "module": "commonjs",
     "outDir": "build",
     "strict": true,
