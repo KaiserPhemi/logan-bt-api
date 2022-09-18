@@ -12,9 +12,9 @@ datasource db {
 
 model User {
   id        Int     @id @default(autoincrement())
-  title     String
+  name     String
   email     String
   password  String
-  is_email_verified Boolean @default(false)
-  is_deleted Boolean @default(false)
+  email_verified Boolean @default(false)
+  deleted Boolean @default(false)
 }
