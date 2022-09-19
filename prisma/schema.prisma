@@ -13,7 +13,7 @@ datasource db {
 model UsersTable {
   id        Int     @id @default(autoincrement())
   name     String
-  email     String
+  email     String @unique
   password  String
   email_verified Boolean @default(false)
   deleted Boolean @default(false)

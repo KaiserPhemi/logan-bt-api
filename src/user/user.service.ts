@@ -43,6 +43,17 @@ export class UserService {
     }
   }
 
+  async findUserByEmail(email: string): Promise<UsersTable | null> {
+    try {
+      const existingUser = await this.prisma.usersTable.findUnique({
+        where: { email: email },
+      });
+      return existingUser;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} user`;
   }
