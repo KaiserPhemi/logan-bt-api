@@ -1,15 +1,46 @@
+// Nest libraries
 import { Injectable } from '@nestjs/common';
+
+// third-party libraries
+import { UsersTable, Prisma } from '@prisma/client';
+
+// services
+import { PrismaService } from 'src/prisma/prisma.service';
+
+// DTOs
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(private prisma: PrismaService) { }
+
+  /**
+   * Addd a new user
+   * @param createUserDto
+   * @returns
+   */
+  async create(createUserDto: CreateUserDto): Promise<UsersTable> {
+    try {
+      const newUser = await this.prisma.usersTable.create({
+        data: { ...createUserDto },
+      });
+      return newUser;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  findAll() {
-    return `This action returns all user`;
+  /**
+   * Fetch all users
+   */
+  async findAll(): Promise<UsersTable[]> {
+    try {
+      const users = await this.prisma.usersTable.findMany();
+      return users;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   findOne(id: number) {

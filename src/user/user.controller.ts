@@ -9,7 +9,11 @@ import {
   ValidationPipe,
   UsePipes,
 } from '@nestjs/common';
+
+// services
 import { UserService } from './user.service';
+
+// DTOs
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
