@@ -7,7 +7,7 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthService {
   /**
-   * Constructo
+   * Constructor
    * @param jwtService
    */
   constructor(private readonly jwtService: JwtService) {}
@@ -18,5 +18,15 @@ export class AuthService {
    */
   async hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, 12);
+  }
+
+  /**
+   * Compares password and hash
+   * @param password
+   * @param hash
+   * @returns
+   */
+  comparePassword(password: string, hash: string): any | boolean {
+    return bcrypt.compare(password, hash);
   }
 }

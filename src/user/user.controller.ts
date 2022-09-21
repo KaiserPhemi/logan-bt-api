@@ -9,6 +9,7 @@ import {
   ValidationPipe,
   UsePipes,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 // Third-party libraries
 import * as bcrypt from 'bcrypt';
@@ -23,6 +24,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 // constant
 const SALT_ROUNDS = 20;
 
+@ApiTags('users')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -36,7 +38,6 @@ export class UserController {
   @UsePipes(ValidationPipe)
   async create(@Body() createUserDto: CreateUserDto) {
     try {
-      // TODO check if user exists already
       const existingUser = await this.userService.findUserByEmail(
         createUserDto.email,
       );
