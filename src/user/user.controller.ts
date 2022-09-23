@@ -5,14 +5,19 @@ import {
   Body,
   Patch,
   Param,
+  Res,
+  Req,
   Delete,
   ValidationPipe,
   UsePipes,
+  HttpStatus,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 // Third-party libraries
 import * as bcrypt from 'bcrypt';
+import { Response } from 'express';
 
 // services
 import { UserService } from './user.service';
@@ -36,19 +41,27 @@ export class UserController {
    */
   @Post()
   @UsePipes(ValidationPipe)
-  async create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body() createUserDto: CreateUserDto, @Res() res: Response) {
     try {
       const existingUser = await this.userService.findUserByEmail(
         createUserDto.email,
       );
-
       if (existingUser) {
-        return;
+        return res.status(HttpStatus.BAD_REQUEST).json({
+          message: 'User already exists',
+        });
       }
-      // TODO hash password
-      return this.userService.create(createUserDto);
+      const hashedPwd = await bcrypt.hash(createUserDto.password, SALT_ROUNDS);
+      const userData: CreateUserDto = Object.assign({}, createUserDto, {
+        password: hashedPwd,
+      });
+      const newUser = await this.userService.create(userData);
+      return res.status(HttpStatus.CREATED).json({
+        message: 'User created successfully',
+        user: newUser,
+      });
     } catch (error) {
-      return error;
+      throw new InternalServerErrorException(error);
     }
   }
 
