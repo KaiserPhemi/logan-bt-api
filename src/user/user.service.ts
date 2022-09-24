@@ -54,8 +54,20 @@ export class UserService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  /**
+   * Fetch a user by user id
+   * @param id
+   * @returns
+   */
+  async findOne(id: number) {
+    try {
+      const existingUser = await this.prisma.usersTable.findUnique({
+        where: { id },
+      });
+      return existingUser;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
