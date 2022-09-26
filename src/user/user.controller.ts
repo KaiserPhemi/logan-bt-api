@@ -65,13 +65,26 @@ export class UserController {
     }
   }
 
+  /**
+   * Fetch all users
+   * @param res
+   * @returns
+   */
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  async findAll(@Res() res: Response) {
+    try {
+      const users = await this.userService.findAll();
+      return res.status(HttpStatus.OK).json({
+        message: 'Users fetched successfully',
+        users,
+      });
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string, @Res() res: Response) {
+  async findOne(@Param('id') id: number, @Res() res: Response) {
     try {
       const existingUser = await this.userService.findOne(id);
       return res.status(HttpStatus.OK).json({
