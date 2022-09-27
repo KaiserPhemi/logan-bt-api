@@ -70,11 +70,39 @@ export class UserService {
     }
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  /**
+   * Update user details
+   * @param id
+   * @param updateUserDto
+   * @returns
+   */
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    try {
+      const updatedUser = await this.prisma.usersTable.update({
+        where: { id },
+        data: { ...updateUserDto },
+      });
+      return updatedUser;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  /**
+   * Deletes a user
+   * @param id
+   * @returns
+   */
+  async remove(id: number) {
+    try {
+      const deletedUser = await this.prisma.usersTable.delete({
+        where: {
+          id,
+        },
+      });
+      return deletedUser;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }
