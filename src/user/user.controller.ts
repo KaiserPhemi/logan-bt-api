@@ -102,7 +102,14 @@ export class UserController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  async remove(@Param('id') id: number, @Res() res: Response) {
+    try {
+      const deletedUser = await this.userService.remove(+id);
+      return res.status(HttpStatus.OK).json({
+        message: 'User deleted successfully',
+      });
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 }
