@@ -97,10 +97,28 @@ export class UserController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+    @Res() res: Response,
+  ) {
+    try {
+      const updatedUser = await this.userService.update(+id, updateUserDto);
+      return res.status(HttpStatus.OK).json({
+        message: 'User updated successfully',
+        user: updatedUser,
+      });
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
+  /**
+   * Delete a user
+   * @param id
+   * @param res
+   * @returns
+   */
   @Delete(':id')
   async remove(@Param('id') id: number, @Res() res: Response) {
     try {
