@@ -7,9 +7,10 @@ import { AuthModule } from './auth/auth.module';
 
 // services
 import { PrismaService } from './prisma/prisma.service';
+import { OrganizationModule } from './organization/organization.module';
 
 @Module({
-  imports: [UserModule, AuthModule],
+  imports: [UserModule, AuthModule, OrganizationModule],
   providers: [PrismaService],
 })
 export class AppModule {}
