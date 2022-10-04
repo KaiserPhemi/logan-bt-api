@@ -18,3 +18,8 @@ model UsersTable {
   email_verified Boolean @default(false)
   deleted Boolean @default(false)
 }
+
+model Organization {
+   id Int @id @default(autoincrement())
+   name     String
+}
