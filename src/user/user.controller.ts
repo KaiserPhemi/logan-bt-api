@@ -6,7 +6,7 @@ import {
   Patch,
   Param,
   Res,
-  Req,
+  HttpException,
   Delete,
   ValidationPipe,
   UsePipes,
@@ -61,7 +61,7 @@ export class UserController {
         user: newUser,
       });
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -79,7 +79,7 @@ export class UserController {
         users,
       });
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -92,7 +92,7 @@ export class UserController {
         user: existingUser,
       });
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -109,7 +109,7 @@ export class UserController {
         user: updatedUser,
       });
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -127,7 +127,7 @@ export class UserController {
         message: 'User deleted successfully',
       });
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }
